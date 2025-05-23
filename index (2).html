@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>签名应用</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>在线签名</h1>
+        <form id="signature-form">
+            <label for="name">姓名：</label>
+            <input type="text" id="name" required>
+            <button type="submit">签名</button>
+        </form>
+        <h2>已签名者：</h2>
+        <ul id="signature-list"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#signature-list {
+    list-style-type: none;
+    padding: 0;
+}
+// 获取 DOM 元素
+const form = document.getElementById('signature-form');
+const signatureList = document.getElementById('signature-list');
+
+// 处理表单提交
+form.addEventListener('submit', function(event) {
+    event.preventDefault(); // 阻止默认提交行为
+    const nameInput = document.getElementById('name');
+    const name = nameInput.value.trim();
+    
+    if (name) {
+        addSignature(name);
+        nameInput.value = ''; // 清空输入框
+    }
+});
+
+// 添加签名到列表
+function addSignature(name) {
+    const listItem = document.createElement('li');
+    listItem.textContent = name;
+    signatureList.appendChild(listItem);
+}
